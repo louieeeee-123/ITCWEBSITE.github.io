@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio 5: Comparative Study on Motherboards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+
+        .logout-link {
+            color: #e74c3c !important;
+        }
+
+        .logout-link:hover {
+            background: rgba(231, 76, 60, 0.2) !important;
+        }
+
+        /* Portfolio Detail Page Styles */
+        .portfolio-detail {
+            padding: 2rem 0;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-subtitle {
+            margin-top: 1rem;
+        }
+
+        .portfolio-subtitle h2 {
+            font-family: 'Playfair Display', serif;
+            color: #3498db;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .author {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .portfolio-content {
+            margin: 2rem 0;
+        }
+
+        /* Portfolio Slide Styles */
+        .portfolio-slide {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-slide:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(52, 152, 219, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slide-number {
+            background: #3498db;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-right: 1rem;
+        }
+
+        .slide-title {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .slide-content {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+        }
+
+        .slide-content h2 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .slide-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: #3498db;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        .slide-content p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .slide-content ul, .slide-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .slide-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-content .center-content {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        /* Cover Slide */
+        .cover-slide {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.1));
+            border: 2px solid rgba(52, 152, 219, 0.3);
+            text-align: center;
+        }
+
+        .cover-content h1 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 3rem;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .author-name {
+            font-family: 'Lato', sans-serif;
+            color: #f0f0f0;
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        /* Table of Contents */
+        .toc-content {
+            padding: 1rem;
+        }
+
+        .toc-content ol {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            list-style-position: inside;
+            padding-left: 0;
+        }
+
+        .toc-content li {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .toc-content .sub-list {
+            margin-top: 0.5rem;
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .toc-content .sub-list li {
+            border-bottom: none;
+            padding-bottom: 0.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .toc-content span {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        /* Comparative Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(52, 152, 219, 0.3);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .comparison-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Discussion Section */
+        .discussion-section {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid #2ecc71;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .discussion-section h3 {
+            color: #2ecc71;
+            margin-top: 0;
+        }
+
+        /* References */
+        .references {
+            padding: 1rem;
+        }
+
+        .references p {
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            padding-left: 1rem;
+            border-left: 3px solid #3498db;
+        }
+
+        .references a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+
+        /* Portfolio Navigation */
+        .portfolio-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .portfolio-btn {
+            background: #3498db;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-count {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .current-slide {
+            background: #3498db;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #95a5a6;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: #2c3e50;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .popup-header h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .popup-body p {
+            color: #ecf0f1;
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .popup-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background: #c0392b;
+        }
+
+        .cancel-btn {
+            background: #7f8c8d;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #95a5a6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .portfolio-slide {
+                padding: 1.5rem;
+            }
+            
+            .slide-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .cover-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .portfolio-navigation {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .navbar ul {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-slide {
+                padding: 1rem;
+            }
+            
+            .slide-content h2 {
+                font-size: 1.3rem;
+            }
+            
+            .cover-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .slide-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .popup-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolios.html">Portfolio Gallery</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="#logout-popup" class="logout-link">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="container">
+            <section class="portfolio-detail">
+                <div class="portfolio-header">
+                    <h1 class="main-title">Comparative Study on Different Types of Motherboards</h1>
+                    <div class="portfolio-subtitle">
+                        <h2>PORTFOLIO #5</h2>
+                        <p class="author">Alexandra Guillen</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-content">
+                    <!-- Slide 1: Cover -->
+                    <div class="portfolio-slide cover-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 1</span>
+                            <h3 class="slide-title">Cover Page</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>Introduction to Computing</h2>
+                            <div class="cover-content">
+                                <h1>PORTFOLIO #5</h1>
+                                <p class="author-name">Alexandra Guillen</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Title -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 2</span>
+                            <h3 class="slide-title">Comparative Study Title</h3>
+                        </div>
+                        <div class="slide-content center-content">
+                            <h2>COMPARATIVE STUDY ON<br>DIFFERENT TYPES OF<br>MOTHERBOARDS</h2>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Introduction -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 3</span>
+                            <h3 class="slide-title">Introduction</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>INTRODUCTION</h2>
+                            <p>A motherboard is the main circuit board in a computer. It holds and connects all the important parts, like the CPU, memory, and storage, allowing them to work together. Motherboards come in different standard sizes, known as form factors.</p>
+                            <p>The form factor decides the size of the computer case, how many components can be added, and the best use for the computer, from small home theaters to large workstations. This study compares the most common motherboard sizes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Comparative Table -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 4</span>
+                            <h3 class="slide-title">Motherboard Comparison Table</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>MOTHERBOARD FORM FACTORS COMPARISON</h2>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Form Factor</th>
+                                        <th>Build (in Inches)</th>
+                                        <th>CPU Slots</th>
+                                        <th>Memory Slots</th>
+                                        <th>Chipsets</th>
+                                        <th>BIOS</th>
+                                        <th>PCI Slots</th>
+                                        <th>SATA</th>
+                                        <th>Builtin Features</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AT Motherboard</td>
+                                        <td>12 x 13.8</td>
+                                        <td>1- PGA Socket (Older)</td>
+                                        <td>4 - 6 SIMM</td>
+                                        <td>Intel 430FX/XX</td>
+                                        <td>Legacy BIOS</td>
+                                        <td>2-4 PCI, 3-4 ISA</td>
+                                        <td>None (Pre-SATA era)</td>
+                                        <td>Basic Ports (PS/2, Serial)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ATX Motherboard</td>
+                                        <td>12 x 9.6</td>
+                                        <td>1 - Modern LGA/PGA</td>
+                                        <td>4 DIMM</td>
+                                        <td>Intel 2790; AMD X670</td>
+                                        <td>UEFI</td>
+                                        <td>1x PCIe x16, 2-3x PCIe x1</td>
+                                        <td>6/8</td>
+                                        <td>Ethernet, Audio, USB, M.2 slots</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BTX Motherboard</td>
+                                        <td>12.8 x 10.5</td>
+                                        <td>1 - Legacy LGA socket</td>
+                                        <td>2 - 4 DIMM</td>
+                                        <td>Intel 975X</td>
+                                        <td>Legacy BIOS / UEFI</td>
+                                        <td>1-2x PCIe x16, 1-2x PCIe x1</td>
+                                        <td>4/6</td>
+                                        <td>Better cooling, Audio, Ethernet</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Extended-ATX Motherboard</td>
+                                        <td>12 x 13</td>
+                                        <td>1 or 2 - Server/ Gaming LGA</td>
+                                        <td>8 DIMM</td>
+                                        <td>AMD TRX50, Intel W790</td>
+                                        <td>UEFI</td>
+                                        <td>4x PCIe x16</td>
+                                        <td>8+</td>
+                                        <td>Dual Ethernet, Many M.2, Many USB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>LPX Motherboard</td>
+                                        <td>9 x 11-13</td>
+                                        <td>1 - Legacy PGA/Slot</td>
+                                        <td>2 - 4 SIMM/DIMM</td>
+                                        <td>Various</td>
+                                        <td>Legacy BIOS</td>
+                                        <td>1 Riser Card (ISA/PCI)</td>
+                                        <td>0-2</td>
+                                        <td>Integrated video, Riser card</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Micro-ATX Motherboard</td>
+                                        <td>9.6 x 9.6</td>
+                                        <td>1 - Modern LGA/PGA socket</td>
+                                        <td>2 - 4 DIMM</td>
+                                        <td>Intel B760; AMD B650</td>
+                                        <td>UEFI</td>
+                                        <td>1x PCIe x16, 1-2x PCIe x1</td>
+                                        <td>4/6</td>
+                                        <td>Ethernet, Audio, USB, M.2 slot</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mini ITX Motherboard</td>
+                                        <td>6.7 x 6.7</td>
+                                        <td>1 - Modern LGA/PGA socket</td>
+                                        <td>2 DIMM</td>
+                                        <td>Intel H770; AMD A620</td>
+                                        <td>UEFI</td>
+                                        <td>1x PCIe x16</td>
+                                        <td>4</td>
+                                        <td>Built in Wi-Fi, Ethernet, Audio</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mini-ATX Motherboard</td>
+                                        <td>5.9 x 5.9</td>
+                                        <td>1 - Obsolete/ Embedded</td>
+                                        <td>1 - 2 (Proprietary)</td>
+                                        <td>VIA Series</td>
+                                        <td>Legacy BIOS</td>
+                                        <td>None or 1x Mini-PCI</td>
+                                        <td>1/2</td>
+                                        <td>Low power, Basic I/O</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pico BTX Motherboard</td>
+                                        <td>8.0 x 10.5</td>
+                                        <td>1 - Legacy LGA Socket</td>
+                                        <td>2 DIMM</td>
+                                        <td>Intel 945</td>
+                                        <td>Legacy BIOS</td>
+                                        <td>1x PCIe x16</td>
+                                        <td>2/4</td>
+                                        <td>Compact design, Basic features</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Standard-ATX Motherboard</td>
+                                        <td>12 x 9.6</td>
+                                        <td>1 - Modern LGA - PGA socket</td>
+                                        <td>4 DIMM</td>
+                                        <td>Intel 2790; AMD X670</td>
+                                        <td>UEFI</td>
+                                        <td>1-2x PCIe x16, 2-3x PCIe x1</td>
+                                        <td>6/8</td>
+                                        <td>Ethernet, Audio, USB, M.2 slots</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5: Discussion -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 5</span>
+                            <h3 class="slide-title">Discussion</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>DISCUSSION</h2>
+                            <div class="discussion-section">
+                                <p>The evolution of motherboard form factors has been driven by the competing demands of performance, expandability, size reduction, thermal efficiency, and cost.</p>
+                                <p>The dominant standard for decades has been the ATX family and its derivatives, which successfully balanced these factors for the mainstream desktop market. The AT form factor, its predecessor, was plagued by poor layout and usability.</p>
+                                <p>While BTX was a technically superior design focused on better cooling, it failed to displace the entrenched ATX ecosystem. In the modern era, the rise of Small Form Factor (SFF) PCs has popularized Micro-ATX and Mini-ITX, which sacrifice some expansion to achieve a much smaller physical footprint.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 6: References Part 1 -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 6</span>
+                            <h3 class="slide-title">References Part 1</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>REFERENCES</h2>
+                            <div class="references">
+                                <p>AnandTech. (2023). Motherboard reviews and chipset analysis. <a href="https://www.anandtech.com/tag/motherboards" target="_blank">https://www.anandtech.com/tag/motherboards</a></p>
+                                <p>Crucial. (2023). Motherboard form factors. <a href="https://www.crucial.com/articles/about-motherboard/motherboard-form-factors" target="_blank">https://www.crucial.com/articles/about-motherboard/motherboard-form-factors</a></p>
+                                <p>Gamers Nexus. (2021, May 10). Motherboard basics: Form factors, sockets & chipsets explained. <a href="https://gamersnexus.net/guides/3561-motherboard-basics-form-factors-sockets-chipsets" target="_blank">https://gamersnexus.net/guides/3561-motherboard-basics-form-factors-sockets-chipsets</a></p>
+                                <p>HP. (2023). Motherboard components and form factors. <a href="https://www.hp.com/us-en/shop/tech-takes/motherboard-components-and-form-factors" target="_blank">https://www.hp.com/us-en/shop/tech-takes/motherboard-components-and-form-factors</a></p>
+                                <p>Intel Corporation. (2004). BTX design guide. <a href="https://www.intel.com/content/www/us/en/support/articles/000005852/boards-and-kits.html" target="_blank">https://www.intel.com/content/www/us/en/support/articles/000005852/boards-and-kits.html</a></p>
+                                <p>Intel Corporation. (2020). ATX specification version 2.2. <a href="https://edc.intel.com/content/www/us/en/design/products-and-solutions/guides-and-reference/atx12vo-specification/" target="_blank">https://edc.intel.com/content/www/us/en/design/products-and-solutions/guides-and-reference/atx12vo-specification/</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 7: References Part 2 -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 7</span>
+                            <h3 class="slide-title">References Part 2</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>REFERENCES</h2>
+                            <div class="references">
+                                <p>Laptop Lab. (2023). Motherboard form factors explained. <a href="https://laptoplab.com/motherboard-form-factors-explained" target="_blank">https://laptoplab.com/motherboard-form-factors-explained</a></p>
+                                <p>MicroATX.com. (2022). Form factor specifications and comparisons. <a href="https://www.microatx.com/specifications.html" target="_blank">https://www.microatx.com/specifications.html</a></p>
+                                <p>PC Guide. (2023). Motherboard form factors. <a href="https://www.pcguide.com/articles/motherboard-form-factors" target="_blank">https://www.pcguide.com/articles/motherboard-form-factors</a></p>
+                                <p>Tom's Hardware. (2023). Motherboard buying guide. <a href="https://www.tomshardware.com/reviews/motherboard-buying-guide.5697.html" target="_blank">https://www.tomshardware.com/reviews/motherboard-buying-guide.5697.html</a></p>
+                                <p>TechSpot. (2023). PC building guide: Motherboards. <a href="https://www.techspot.com/guides/2170-pc-building-motherboards" target="_blank">https://www.techspot.com/guides/2170-pc-building-motherboards</a></p>
+                                <p>VIA Technologies, Inc. (2006). Mini-ITX form factor specification. <a href="http://www.via.com.tw/en/initiatives/spearhead/mini-itx/" target="_blank">http://www.via.com.tw/en/initiatives/spearhead/mini-itx/</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-navigation">
+                    <a href="portfolios.html" class="portfolio-btn">← Back to Portfolio Gallery</a>
+                    <div class="slide-count">
+                        <span class="current-slide">7</span> slides total
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Logout Confirmation Popup -->
+    <div id="logout-popup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Confirm Logout</h3>
+            </div>
+            <div class="popup-body">
+                <p>Are you sure you want to logout?</p>
+            </div>
+            <div class="popup-actions">
+                <a href="logout.html" class="popup-btn confirm-btn">Yes, Logout</a>
+                <a href="#" class="popup-btn cancel-btn">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Introduction to Computing Portfolio</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutLink = document.querySelector('.logout-link');
+            const popupOverlay = document.getElementById('logout-popup');
+            const cancelBtn = document.querySelector('.cancel-btn');
+            
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'flex';
+                });
+            }
+            
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'none';
+                });
+            }
+            
+            popupOverlay.addEventListener('click', function(e) {
+                if (e.target === popupOverlay) {
+                    popupOverlay.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio 6: Comparative Study on Different Types of Computers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+
+        .logout-link {
+            color: #e74c3c !important;
+        }
+
+        .logout-link:hover {
+            background: rgba(231, 76, 60, 0.2) !important;
+        }
+
+        /* Portfolio Detail Page Styles */
+        .portfolio-detail {
+            padding: 2rem 0;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-subtitle {
+            margin-top: 1rem;
+        }
+
+        .portfolio-subtitle h2 {
+            font-family: 'Playfair Display', serif;
+            color: #3498db;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .author {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .portfolio-content {
+            margin: 2rem 0;
+        }
+
+        /* Portfolio Slide Styles */
+        .portfolio-slide {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-slide:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(52, 152, 219, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slide-number {
+            background: #3498db;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-right: 1rem;
+        }
+
+        .slide-title {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .slide-content {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+        }
+
+        .slide-content h2 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .slide-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: #3498db;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        .slide-content p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .slide-content ul, .slide-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .slide-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-content .center-content {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        /* Cover Slide */
+        .cover-slide {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.1));
+            border: 2px solid rgba(52, 152, 219, 0.3);
+            text-align: center;
+        }
+
+        .cover-content h1 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 3rem;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .author-name {
+            font-family: 'Lato', sans-serif;
+            color: #f0f0f0;
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        /* Comparative Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(52, 152, 219, 0.3);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #3498db;
+            white-space: nowrap;
+        }
+
+        .comparison-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            vertical-align: top;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Computer Type Categories */
+        .supercomputer-row {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .mainframe-row {
+            background: rgba(155, 89, 182, 0.1);
+        }
+
+        .minicomputer-row {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .server-row {
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .workstation-row {
+            background: rgba(241, 196, 15, 0.1);
+        }
+
+        .microcomputer-row {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        /* Discussion Section */
+        .discussion-section {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid #2ecc71;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* References */
+        .references {
+            padding: 1rem;
+        }
+
+        .references p {
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            padding-left: 1rem;
+            border-left: 3px solid #3498db;
+        }
+
+        .references a {
+            color: #3498db;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+
+        /* Portfolio Navigation */
+        .portfolio-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .portfolio-btn {
+            background: #3498db;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-count {
+            color: #f0f0f0;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .current-slide {
+            background: #3498db;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #95a5a6;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: #2c3e50;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .popup-header h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .popup-body p {
+            color: #ecf0f1;
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .popup-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background: #c0392b;
+        }
+
+        .cancel-btn {
+            background: #7f8c8d;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #95a5a6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-slide {
+                padding: 1.5rem;
+            }
+            
+            .slide-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .cover-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .portfolio-navigation {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                font-size: 0.75rem;
+            }
+            
+            .navbar ul {
+                gap: 1rem;
+            }
+            
+            .references p {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-slide {
+                padding: 1rem;
+            }
+            
+            .slide-content h2 {
+                font-size: 1.3rem;
+            }
+            
+            .cover-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .slide-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .popup-actions {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolios.html">Portfolio Gallery</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="#logout-popup" class="logout-link">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="container">
+            <section class="portfolio-detail">
+                <div class="portfolio-header">
+                    <h1 class="main-title">Comparative Study on Different Types of Computers</h1>
+                    <div class="portfolio-subtitle">
+                        <h2>PORTFOLIO #6</h2>
+                        <p class="author">Alexandra Guillen</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-content">
+                    <!-- Slide 1: Cover -->
+                    <div class="portfolio-slide cover-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 1</span>
+                            <h3 class="slide-title">Cover Page</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>INTRODUCTION TO COMPUTING</h2>
+                            <div class="cover-content">
+                                <h1>PORTFOLIO #6</h1>
+                                <p class="author-name">ALEXANDRA GUILLEN</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Title -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 2</span>
+                            <h3 class="slide-title">Comparative Study Title</h3>
+                        </div>
+                        <div class="slide-content center-content">
+                            <h2 style="font-size: 2.2rem; line-height: 1.3;">COMPARATIVE<br>STUDY ON<br>DIFFERENT TYPES OF<br>COMPUTERS</h2>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Introduction -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 3</span>
+                            <h3 class="slide-title">Introduction</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>INTRODUCTION</h2>
+                            <p>Computers have evolved from room-sized machines to powerful devices that fit in our pockets, each designed for specific tasks and user needs. This variety in computing power, size, and cost means that a machine perfect for scientific research would be inefficient and wasteful for writing a school report.</p>
+                            <p>This report provides a comparative study of the main categories of computers in use today: supercomputers, mainframes, minicomputers, servers, workstations, and microcomputers. By examining their specifications, working principles, and energy consumption, we can understand their distinct roles in our technological ecosystem.</p>
+                            <p>The purpose of this study is to clearly differentiate these computer types and identify the specific fields where each excels.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Comparison Table Part 1 -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 4</span>
+                            <h3 class="slide-title">Computer Types Comparison - Part 1</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>COMPUTER TYPES COMPARISON</h2>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Types of Computers</th>
+                                        <th>Name/Brand</th>
+                                        <th>CPU</th>
+                                        <th>Memory</th>
+                                        <th>Processing Speed</th>
+                                        <th>Calculating Power</th>
+                                        <th>Working Principle</th>
+                                        <th>Energy Consumption</th>
+                                        <th>Field of Use</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="supercomputer-row">
+                                        <td><strong>Supercomputer</strong></td>
+                                        <td>Frontier (Oak Ridge National Lab)</td>
+                                        <td>64-core AMD EPYC</td>
+                                        <td>4,402 GB DDR4 + HBM</td>
+                                        <td>600 GHz</td>
+                                        <td>~ 1.7 ExaFLOPS</td>
+                                        <td>Massively Parallel Processing (MPP) with thousands of nodes working simultaneously on parts of a problem.</td>
+                                        <td>~ 2.1MW (Very High)</td>
+                                        <td>Climate modeling, nuclear simulation, genomic sequencing, astrophysics.</td>
+                                    </tr>
+                                    <tr class="mainframe-row">
+                                        <td><strong>Mainframe Computers</strong></td>
+                                        <td>IBM z16</td>
+                                        <td>IBM Telum</td>
+                                        <td>40 TB+</td>
+                                        <td>High-frequency, optimized for I/O</td>
+                                        <td>~ 2 Billions IPS</td>
+                                        <td>Centralized, transaction-based processing; Handles massive I/O operations with extreme reliability and redundancy.</td>
+                                        <td>~ 5-10 kW per frame (High)</td>
+                                        <td>Bulk data processing for banks (credit card transactions), airlines (reservations), government census.</td>
+                                    </tr>
+                                    <tr class="minicomputer-row">
+                                        <td><strong>Mini Computers</strong></td>
+                                        <td>IBM Power S1014</td>
+                                        <td>POWER10</td>
+                                        <td>4TB</td>
+                                        <td>~ 4.0-4.9 GHz</td>
+                                        <td>High MIPS</td>
+                                        <td>A mid-range, multi-user system that serves as a powerful central resource for a department or medium-sized business.</td>
+                                        <td>~ 1-3 kW (Medium)</td>
+                                        <td>Medium-scale ERP systems, database servers, scientific instrumentation control.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5: Comparison Table Part 2 -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 5</span>
+                            <h3 class="slide-title">Computer Types Comparison - Part 2</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>COMPUTER TYPES COMPARISON (CONTINUED)</h2>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Types of Computers</th>
+                                        <th>Name/Brand</th>
+                                        <th>CPU</th>
+                                        <th>Memory</th>
+                                        <th>Processing Speed</th>
+                                        <th>Calculating Power</th>
+                                        <th>Working Principle</th>
+                                        <th>Energy Consumption</th>
+                                        <th>Field of Use</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="server-row">
+                                        <td><strong>Server</strong></td>
+                                        <td>Dell PowerEdge R760</td>
+                                        <td>Dual Intel Xeon Silver 4410Y</td>
+                                        <td>1TB DDR5</td>
+                                        <td>2.0 GHz</td>
+                                        <td>High FLOPS & IOPS</td>
+                                        <td>Provides shared resources (files, apps, websites) to multiple clients over a network. Runs 24/7 with redundancy.</td>
+                                        <td>~ 500W - 1.2 kW (Medium - High)</td>
+                                        <td>Hosting websites, enterprise applications (email, databases), virtual desktop infrastructure (VDI).</td>
+                                    </tr>
+                                    <tr class="workstation-row">
+                                        <td><strong>Workstations</strong></td>
+                                        <td>HP Z8 Fury G5</td>
+                                        <td>Dual Intel Xeon w9-3495X</td>
+                                        <td>2TB DDR5</td>
+                                        <td>4.8 GHz</td>
+                                        <td>~ 4-8 TFLOPS</td>
+                                        <td>A high-end desktop for a single user, with server-grade components optimized for memory-intensive, single-threaded or multi-threaded tasks.</td>
+                                        <td>~ 400W - 1.5kW (Medium - High)</td>
+                                        <td>3D animation and rendering, CAD/CAM engineering, financial modeling, software development.</td>
+                                    </tr>
+                                    <tr class="microcomputer-row">
+                                        <td><strong>Micro Computers</strong></td>
+                                        <td>Apple MacBook Air (M3)</td>
+                                        <td>Apple M3 chip</td>
+                                        <td>24 GB Unified Memory</td>
+                                        <td>4.05 GHz</td>
+                                        <td>~ 2-3 TFLOPS</td>
+                                        <td>Von Neumann architecture. A general-purpose system for a single user, running a standard OS for diverse applications.</td>
+                                        <td>~ 30-50W (Very Low)</td>
+                                        <td>Personal computing, web browsing, office applications, media consumption, light photo editing.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Slide 6: Discussion -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 6</span>
+                            <h3 class="slide-title">Discussion</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>DISCUSSION</h2>
+                            <div class="discussion-section">
+                                <p>The comparison shows a clear hierarchy among computer types, balancing processing power, user capacity, and energy efficiency. At the top, supercomputers like Frontier use massive parallel processing for scientific breakthroughs but consume enormous energy. Mainframes like IBM z16 prioritize reliability and handling thousands of simultaneous transactions for critical industries like banking.</p>
+                                <p>Servers act as network workhorses, serving multiple clients with shared resources, while minicomputers provide centralized power for medium-sized organizations. Workstations offer high-end performance for specialized single-user tasks like engineering, and microcomputers serve general-purpose needs with maximum efficiency for individual users.</p>
+                                <p>Each computer type occupies a specific niche, with capabilities precisely matched to its intended use—from national research to personal computing.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 7: References -->
+                    <div class="portfolio-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide 7</span>
+                            <h3 class="slide-title">References</h3>
+                        </div>
+                        <div class="slide-content">
+                            <h2>REFERENCES</h2>
+                            <div class="references">
+                                <p>Apple. (2024). <em>MacBook Air (13-inch, M3) - Technical specifications</em>. <a href="https://www.apple.com/macbook-air/specs/" target="_blank">https://www.apple.com/macbook-air/specs/</a></p>
+                                <p>Dell Technologies. (2024). PowerEdge R760 rack server specifications. Dell.com. <a href="https://www.dell.com/en-us/shop/dell-rack-servers/poweredge-r760-rack-server/spd/poweredge-r760" target="_blank">https://www.dell.com/en-us/shop/dell-rack-servers/poweredge-r760-rack-server/spd/poweredge-r760</a></p>
+                                <p>Hennessy, J. L., & Patterson, D. A. (2017). Computer architecture: A quantitative approach (6th ed.). Morgan Kaufmann.</p>
+                                <p>HP Inc. (2024). HP Z8 Fury G5 workstation datasheet. HP.com. <a href="https://www.hp.com/us-en/workstations/z8-fury-g5.html" target="_blank">https://www.hp.com/us-en/workstations/z8-fury-g5.html</a></p>
+                                <p>IBM. (2022). <em>IBM z16: The world's most powerful quantum-safe system for real-time enterprise computing</em> [Data sheet]. <a href="https://www.ibm.com/downloads/cas/OQGQAXZP" target="_blank">https://www.ibm.com/downloads/cas/OQGQAXZP</a></p>
+                                <p>IBM. (2024). IBM Power System S1014. IBM Documentation. <a href="https://www.ibm.com/products/power-s1014" target="_blank">https://www.ibm.com/products/power-s1014</a></p>
+                                <p>Oak Ridge Leadership Computing Facility. (2024). Frontier user guide. Oak Ridge National Laboratory. <a href="https://docs.olcf.ornl.gov/systems/frontier_user_guide.html" target="_blank">https://docs.olcf.ornl.gov/systems/frontier_user_guide.html</a></p>
+                                <p>Stokes, J. (2007). Inside the machine: An illustrated introduction to microprocessors and computer architecture. No Starch Press.</p>
+                                <p>TOP500. (2024, June). <em>Frontier - HPE Cray EX235a, AMD Optimized 3rd Generation EPYC 64C 2GHz, AMD Instinct MI250X, Slingshot-TOP500.org.</em> <a href="https://www.top500.org/system/180047/" target="_blank">https://www.top500.org/system/180047/</a></p>
+                                <p>U.S. Department of Energy. (2024). Energy efficiency of high-performance computing. Office of Energy Efficiency & Renewable Energy. <a href="https://www.energy.gov/eere/energy-efficiency-high-performance-computing" target="_blank">https://www.energy.gov/eere/energy-efficiency-high-performance-computing</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-navigation">
+                    <a href="portfolios.html" class="portfolio-btn">← Back to Portfolio Gallery</a>
+                    <div class="slide-count">
+                        <span class="current-slide">7</span> slides total
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Logout Confirmation Popup -->
+    <div id="logout-popup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Confirm Logout</h3>
+            </div>
+            <div class="popup-body">
+                <p>Are you sure you want to logout?</p>
+            </div>
+            <div class="popup-actions">
+                <a href="logout.html" class="popup-btn confirm-btn">Yes, Logout</a>
+                <a href="#" class="popup-btn cancel-btn">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Introduction to Computing Portfolio</p>
+    </footer>
+
+    <script>
+        // Simple JavaScript to handle the logout popup
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutLink = document.querySelector('.logout-link');
+            const popupOverlay = document.getElementById('logout-popup');
+            const cancelBtn = document.querySelector('.cancel-btn');
+            
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'flex';
+                });
+            }
+            
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'none';
+                });
+            }
+            
+            // Close popup when clicking outside
+            popupOverlay.addEventListener('click', function(e) {
+                if (e.target === popupOverlay) {
+                    popupOverlay.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
